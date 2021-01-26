@@ -1,0 +1,53 @@
+.dialogs {
+    background: #a6dd7b;
+    color: #1a1918;
+    padding: 5px;
+    display: grid;
+    grid-template-areas:
+
+    "dial dial"
+    "peop mess";
+
+    grid-template-rows: auto auto;
+    grid-template-columns: 2fr 6fr;
+
+
+
+
+}
+
+.dial {
+    grid-area: dial;
+    font-size: 20px;
+    color: #c7c7ea;
+    font-weight: bold;
+}
+
+.peoples {
+    grid-area: peop;
+    background-color: #cdc583;
+}
+
+.messages {
+    grid-area: mess;
+    background-color: #e0e0f1;
+}
+
+.message {
+    font-weight: normal;
+    color: #080809;
+    padding: 10px;
+    margin: 10px;
+}
+
+.people {
+    font-size: 18px;
+    padding: 10px;
+    margin: 10px;
+    color: #1a241b;
+    font-weight: bold;
+}
+
+.peoples .active {
+    color: #d04209;
+}

@@ -1,0 +1,12 @@
+
+.profile {
+    grid-area: profile;
+    background: bisque;
+    padding: 5px;
+
+}
+
+.img {
+    padding: 1px;
+
+}

@@ -1,0 +1,21 @@
+.sidebar {
+    grid-area: sidebar;
+    background: #d2c9c9;
+    color: #1a1918;
+    padding: 5px;
+
+}
+
+
+.link a  {
+    color: blue;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.link a.active  {
+    color: #ea5c38;
+    font-size: 20px;
+    padding: 5px;
+    font-style: italic;
+}
