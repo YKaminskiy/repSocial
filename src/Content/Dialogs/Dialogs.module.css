@@ -1,6 +1,5 @@
 .dialogs {
     background: #a6dd7b;
-    color: #1a1918;
     padding: 5px;
     display: grid;
     grid-template-areas:
@@ -16,16 +15,11 @@
 
 }
 
-.dial {
-    grid-area: dial;
-    font-size: 20px;
-    color: #c7c7ea;
-    font-weight: bold;
-}
-
 .peoples {
+    padding: 10px;
     grid-area: peop;
     background-color: #cdc583;
+
 }
 
 .messages {
@@ -40,14 +34,19 @@
     margin: 10px;
 }
 
-.people {
+.people a {
     font-size: 18px;
+    color: #072466;
     padding: 10px;
     margin: 10px;
-    color: #1a241b;
+    text-decoration: none;
     font-weight: bold;
+
 }
 
-.peoples .active {
+.people a.active {
     color: #d04209;
+    padding: 5px;
+
+
 }
