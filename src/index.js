@@ -3,10 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import state from "./Redux/state";
+
+
+
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+
+
+
+
+    <App usersDB = {state.dialogs.usersDB} messagesDB ={state.dialogs.messagesDB} ProfileMessagesDB ={state.profile.ProfileMessagesDB} />
+
+
+
+
   </React.StrictMode>,
   document.getElementById('root')
 );
