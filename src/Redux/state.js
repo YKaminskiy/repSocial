@@ -49,5 +49,14 @@ export let addPost = (text) => {
 
 };
 
+export let addMessage = (newDmessage) => {
+    let newDailog = {
+
+        message: newDmessage,
+
+            }
+    state.dialogs.messagesDB.push(newDailog)
+}
+
 
 export default state;

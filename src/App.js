@@ -23,8 +23,10 @@ const App = (props) => {
             <Header/>
 
             <Route path="/profile" render= { () => <Profile ProfileMessagesDB ={props.state.profile.ProfileMessagesDB}
-                                                            addPost = {props.addPost}                         />            }/>
-            <Route path="/dialogs" render= { () => <Dialogs dialogs = {props.state.dialogs}  /> } />
+                                                            addPost = {props.addPost}
+                                                            />            }/>
+            <Route path="/dialogs" render= { () => <Dialogs dialogs = {props.state.dialogs}
+                                                            addMessage = {props.addMessage}    /> } />
             <Sidebar/>
             <Footer/>
 

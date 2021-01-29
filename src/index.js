@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import state from "./Redux/state";
 import {addPost} from "./Redux/state";
+import {addMessage} from "./Redux/state";
 
 export let rerender =(state)=> {
 
@@ -13,7 +14,10 @@ export let rerender =(state)=> {
 
 
             <App state={state}
-                 addPost={addPost}/>
+                 addPost={addPost}
+                 addMessage ={addMessage}
+
+            />
 
 
         </React.StrictMode>,
