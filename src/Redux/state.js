@@ -1,3 +1,4 @@
+import {rerender} from "../index";
 
 let state = {
 
@@ -24,14 +25,29 @@ let state = {
 
     profile: {
         ProfileMessagesDB: [
-            {message: "The generated Lorem Ipsum is therefore always free from repetition", likes: 53},
-            {message: "Contrary to popular belief, Lorem Ipsum is not simply random text", likes: 54},
-            {message: "It has survived not only five centuries, but also the leap into electronic typesetting",
+            {id: 1, message: "The generated Lorem Ipsum is therefore always free from repetition", likes: 53},
+            {id: 2, message: "Contrary to popular belief, Lorem Ipsum is not simply random text", likes: 54},
+            {id: 3, message: "It has survived not only five centuries, but also the leap into electronic typesetting",
                 likes: 43
             },
 
         ]
     }
 }
+
+
+export let addPost = (text) => {
+
+    let newPost = {
+        id: 4,
+        likes: 0,
+        message: text,
+    };
+
+    state.profile.ProfileMessagesDB.push(newPost)
+
+
+};
+
 
 export default state;

@@ -3,6 +3,8 @@ import Post from "./Post/Post";
 import React from "react";
 
 
+
+
 const ProfilePosts = (props) => {
 
 
@@ -10,12 +12,21 @@ const ProfilePosts = (props) => {
             <Post message = {item.message} likes = {item.likes} />
         );
 
+    let text = React.createRef();
+
+let addPost = () => {
+    let messageText = text.current.value;
+    props.addPost(messageText)
+}
+
+
+
       return (
 
         <div>My posts
 
-            <div><textarea></textarea>
-                <button>Add</button>
+            <div><textarea ref={text} ></textarea>
+                <button onClick={ addPost }>Add</button>
             </div>
 
             <div className={styles.posts}>

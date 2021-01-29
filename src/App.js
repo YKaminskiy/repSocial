@@ -10,6 +10,8 @@ import Route from "react-router-dom/es/Route";
 
 
 
+
+
 const App = (props) => {
 
     return (
@@ -20,8 +22,9 @@ const App = (props) => {
 
             <Header/>
 
-            <Route path="/profile" render= { () => <Profile ProfileMessagesDB ={props.ProfileMessagesDB}    />            }/>
-            <Route path="/dialogs" render= { () => <Dialogs usersDB = {props.usersDB} messagesDB ={props.messagesDB}  /> } />
+            <Route path="/profile" render= { () => <Profile ProfileMessagesDB ={props.state.profile.ProfileMessagesDB}
+                                                            addPost = {props.addPost}                         />            }/>
+            <Route path="/dialogs" render= { () => <Dialogs dialogs = {props.state.dialogs}  /> } />
             <Sidebar/>
             <Footer/>
 
