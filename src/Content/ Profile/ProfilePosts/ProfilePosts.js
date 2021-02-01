@@ -3,8 +3,6 @@ import Post from "./Post/Post";
 import React from "react";
 
 
-
-
 const ProfilePosts = (props) => {
 
 
@@ -14,32 +12,27 @@ const ProfilePosts = (props) => {
 
     let text = React.createRef();
 
-let addPost = () => {
+    let changeText = () => {
     let messageText = text.current.value;
-    props.addPost(messageText)
+    props.updatePost(messageText)
+
 }
-
-
 
       return (
 
         <div>My posts
 
-            <div><textarea ref={text} ></textarea>
-                <button onClick={ addPost }>Add</button>
+            <div>
+
+                <div><textarea  onChange={changeText}
+                            ref={text}
+                            value={props.newPostText} /></div>
+                    <div><button onClick={props.addPost}>Add</button></div>
             </div>
 
             <div className={styles.posts}>
 
                 {ProfileMessages}
-
-
-
-
-
-
-
-
 
             </div>
 

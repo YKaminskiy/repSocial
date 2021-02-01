@@ -7,6 +7,7 @@ import Sidebar from "./Sidebar/Sidebar";
 import Dialogs from "./Content/Dialogs/Dialogs";
 import {BrowserRouter} from "react-router-dom";
 import Route from "react-router-dom/es/Route";
+import {changeMessage, updatePost} from "./Redux/state";
 
 
 
@@ -24,9 +25,14 @@ const App = (props) => {
 
             <Route path="/profile" render= { () => <Profile ProfileMessagesDB ={props.state.profile.ProfileMessagesDB}
                                                             addPost = {props.addPost}
+                                                            newPostText = {props.state.profile.newPostText}
+                                                            updatePost = {props.updatePost}
                                                             />            }/>
             <Route path="/dialogs" render= { () => <Dialogs dialogs = {props.state.dialogs}
-                                                            addMessage = {props.addMessage}    /> } />
+                                                            addMessage = {props.addMessage}
+                                                            newMessageText = {props.state.dialogs.newMessageText}
+                                                            changeMessage = {props.changeMessage}
+            /> } />
             <Sidebar/>
             <Footer/>
 

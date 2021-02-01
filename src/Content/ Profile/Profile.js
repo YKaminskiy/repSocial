@@ -11,7 +11,11 @@ const Profile = (props) => {
             </div>
 
         <ProfilePosts ProfileMessagesDB ={props.ProfileMessagesDB}
-                      addPost = {props.addPost}                                             />
+                      addPost = {props.addPost}
+                      newPostText = {props.newPostText}
+                      updatePost = {props.updatePost}
+
+/>
 
 
         </div>
