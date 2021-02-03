@@ -7,7 +7,8 @@ import Sidebar from "./Sidebar/Sidebar";
 import Dialogs from "./Content/Dialogs/Dialogs";
 import {BrowserRouter} from "react-router-dom";
 import Route from "react-router-dom/es/Route";
-import {changeMessage, updatePost} from "./Redux/state";
+import store from "./Redux/state";
+
 
 
 
@@ -23,15 +24,13 @@ const App = (props) => {
 
             <Header/>
 
-            <Route path="/profile" render= { () => <Profile ProfileMessagesDB ={props.state.profile.ProfileMessagesDB}
-                                                            addPost = {props.addPost}
-                                                            newPostText = {props.state.profile.newPostText}
-                                                            updatePost = {props.updatePost}
+            <Route path="/profile" render= { () => <Profile profile ={props.state.profile}
+                                                            dispatch = {props.dispatch}
                                                             />            }/>
             <Route path="/dialogs" render= { () => <Dialogs dialogs = {props.state.dialogs}
-                                                            addMessage = {props.addMessage}
-                                                            newMessageText = {props.state.dialogs.newMessageText}
-                                                            changeMessage = {props.changeMessage}
+                                                            dispatch = {props.dispatch}
+
+
             /> } />
             <Sidebar/>
             <Footer/>
