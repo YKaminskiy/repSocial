@@ -1,25 +1,20 @@
 import styles from './ProfilePosts.module.css'
 import Post from "./Post/Post";
 import React from "react";
-import {addPostActionCreator, updatePostActionCreator} from "../../../Redux/state";
-
-
 
 const ProfilePosts = (props) => {
 
-    let ProfileMessages = props.ProfileMessagesDB.map(item =>
+    let ProfileMessages = props.profile.ProfileMessagesDB.map(item =>
         <Post message={item.message} likes={item.likes}/>
     );
 
-
     let addPost = () => {
-        props.dispatch(addPostActionCreator())
+        props.addPost()
     }
 
     let changeText = (event) => {
         let messageText = event.target.value;
-        props.dispatch(updatePostActionCreator(messageText))
-
+        props.changeText(messageText)
     }
     return (
 
@@ -28,7 +23,7 @@ const ProfilePosts = (props) => {
             <div>
 
                 <div><textarea placeholder={"Message"} onChange={changeText}
-                               value={props.newPostText}/></div>
+                            value={props.profile.newPostText}/></div>
                 <div>
                     <button onClick={addPost}>Add</button>
                 </div>

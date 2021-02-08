@@ -1,0 +1,32 @@
+.userspage {
+    background: #a6dd7b;
+    padding: 5px;
+
+}
+
+.avatar {
+    border-radius: 40px;
+
+}
+
+.users {
+    padding: 10px;
+    grid-area: peop;
+    background-color: #cdc583;
+}
+
+.user a {
+    font-size: 18px;
+    color: #072466;
+    padding: 10px;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.user a.active {
+    color: #d04209;
+    padding: 5px;
+
+
+}

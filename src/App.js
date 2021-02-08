@@ -4,14 +4,11 @@ import React from "react";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import Sidebar from "./Sidebar/Sidebar";
-import Dialogs from "./Content/Dialogs/Dialogs";
 import {BrowserRouter} from "react-router-dom";
 import Route from "react-router-dom/es/Route";
-import store from "./Redux/state";
-
-
-
-
+import DialogsContainer from "./Content/Dialogs/DialogsContainer";
+import Users from "./Users/Users";
+import UsersContainer from "./Users/UsersContainer";
 
 
 const App = (props) => {
@@ -24,14 +21,14 @@ const App = (props) => {
 
             <Header/>
 
-            <Route path="/profile" render= { () => <Profile profile ={props.state.profile}
-                                                            dispatch = {props.dispatch}
+            <Route path="/profile" render= { () => <Profile store = {props.store}
                                                             />            }/>
-            <Route path="/dialogs" render= { () => <Dialogs dialogs = {props.state.dialogs}
-                                                            dispatch = {props.dispatch}
+            <Route path="/dialogs" render= { () => <DialogsContainer store={props.store }
+            />            }/>
+
+            <Route path="/users" render= { () => <UsersContainer store={props.store }  />  }/>
 
 
-            /> } />
             <Sidebar/>
             <Footer/>
 
