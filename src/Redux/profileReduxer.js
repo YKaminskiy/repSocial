@@ -9,6 +9,7 @@ let initState = {
             },
         ],
         newPostText: '',
+    profile: null,
     };
 
 
@@ -31,6 +32,13 @@ const profileReduxer = (state = initState, action) => {
                        ...state,
                        newPostText: action.text
                    }
+
+        case "SET-USER-PROFILE": {
+            return {
+                ...state,
+                profile: action.profile
+            }
+        }
         default:
             return state;
 
@@ -47,6 +55,13 @@ export let addPostActionCreator = () => {
 export let updatePostActionCreator = (messageText) => {
     return {
         type: "UPDATE-POST", text: messageText
+    }
+
+};
+
+export let setUserProfile = (profile) => {
+    return {
+        type: "SET-USER-PROFILE", profile
     }
 
 };

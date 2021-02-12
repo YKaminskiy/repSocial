@@ -7,11 +7,11 @@ import Messages from "./Messages/Messages";
 
 
 const Dialogs = (props) => {
-    let DialogUser = props.dialogs.usersDB.map(item =>
+    let DialogUser = props.dialogsPage.usersDB.map(item =>
         <DialogsUser id = {item.id} key ={item.id} name={item.name} />
     );
 
-    let DialogMessages = props.dialogs.messagesDB.map(item =>
+    let DialogMessages = props.dialogsPage.messagesDB.map(item =>
         <Messages message = {item.message} />
 );
 
@@ -38,7 +38,7 @@ const Dialogs = (props) => {
             <div className={styles.messages}>
 
                 {DialogMessages}
-                <div><textarea placeholder={"Message"} onChange={newMessage} value={props.dialogs.newMessageText}/></div>
+                <div><textarea placeholder={"Message"} onChange={newMessage} value={props.dialogsPage.newMessageText}/></div>
                 <div><button onClick={addMessage}>Add</button></div>
 
             </div>

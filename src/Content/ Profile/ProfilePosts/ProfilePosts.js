@@ -4,7 +4,7 @@ import React from "react";
 
 const ProfilePosts = (props) => {
 
-    let ProfileMessages = props.profile.ProfileMessagesDB.map(item =>
+    let ProfileMessages = props.profilePage.ProfileMessagesDB.map(item =>
         <Post message={item.message} likes={item.likes}/>
     );
 
@@ -23,7 +23,7 @@ const ProfilePosts = (props) => {
             <div>
 
                 <div><textarea placeholder={"Message"} onChange={changeText}
-                            value={props.profile.newPostText}/></div>
+                            value={props.profilePage.newPostText}/></div>
                 <div>
                     <button onClick={addPost}>Add</button>
                 </div>

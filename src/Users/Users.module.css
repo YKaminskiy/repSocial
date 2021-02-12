@@ -4,12 +4,24 @@
 
 }
 
+
+.selector {
+    background: #cdc583;
+}
+
+.selected {
+   font-size: 20px;
+
+}
+
+
+
 .avatar {
     border-radius: 40px;
 
 }
 
-.users {
+.eeeee {
     padding: 10px;
     grid-area: peop;
     background-color: #cdc583;
