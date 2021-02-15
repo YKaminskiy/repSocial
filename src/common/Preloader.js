@@ -1,4 +1,4 @@
-import LoadingImg from "../img/load.png";
+import LoadingImg from "../Content/img/load.png";
 
 
 let Preloader = (props) => {

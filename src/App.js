@@ -1,14 +1,14 @@
 import './App.css';
 import React from "react";
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
-import Sidebar from "./Sidebar/Sidebar";
+import Header from "./Content/Header/Header";
+import Footer from "./Content/Footer/Footer";
+import Sidebar from "./Content/Sidebar/Sidebar";
 import {BrowserRouter} from "react-router-dom";
 import Route from "react-router-dom/es/Route";
 import DialogsContainer from "./Content/Dialogs/DialogsContainer";
-import UsersContainer from "./Users/UsersContainer";
+import UsersContainer from "./Content/Users/UsersContainer";
 import ProfileContainer from "./Content/ Profile/ProfileContainer";
-import HeaderContainer from "./Header/HeaderContainer";
+import HeaderContainer from "./Content/Header/HeaderContainer";
 
 
 const App = (props) => {

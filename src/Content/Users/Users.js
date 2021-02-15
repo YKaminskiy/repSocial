@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Users.module.css';
 import DefaultUserLogo from "../img/user.png";
-import Preloader from "../common/Preloader";
+import Preloader from "../../common/Preloader";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 

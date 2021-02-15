@@ -1,29 +1,28 @@
 import React from 'react';
 import {connect} from "react-redux";
-import axios from "axios";
 import Users from "./Users";
-import {follow, setPagination, setTotalCount, setUsers, toggleLoadingImg, unfollow} from "../Redux/usersReduxer";
+import {follow, setPagination, setTotalCount, setUsers, toggleLoadingImg, unfollow} from "../../Redux/usersReduxer";
+import {ApiUsers} from "../../api/api";
 
 
 
 class UsersAPI extends React.Component {
     componentDidMount() {
         this.props.toggleLoadingImg(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{ headers: {'API-KEY': '6397f476-ecf7-4ee3-bb38-7ec52a1be1b9'}})
-            .then(response => {
+          ApiUsers.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
                 this.props.toggleLoadingImg(false);
-                this.props.setUsers(response.data.items)
+                this.props.setUsers(data.items)
+                this.props.setTotalCount(data.totalCount)
             })
     }
 
     pageOnChange =(pageNumber)=> {
         this.props.setPagination(pageNumber)
         this.props.toggleLoadingImg(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{ headers: {'API-KEY': '6397f476-ecf7-4ee3-bb38-7ec52a1be1b9'}})
-            .then(response => {
+        ApiUsers.getUsers(pageNumber, this.props.pageSize).then(data => {
                 this.props.toggleLoadingImg(false);
-                this.props.setUsers(response.data.items)
-                this.props.setTotalCount(response.data.totalCount)
+                this.props.setUsers(data.items)
+
             })
     }
 
