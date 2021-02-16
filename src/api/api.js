@@ -16,6 +16,34 @@ export const ApiUsers = {
             .then(response => {
                 return response.data
             })
+    },
+
+    unfollow(id) {
+        return instance.delete(`follow/${id}`)
+            .then(response => {
+                return response.data
+            })
+    },
+
+    follow(id) {
+        return instance.post(`follow/${id}`)
+            .then(response => {
+                return response.data
+            })
+    },
+
+    userAuth(id, email, login) {
+        return instance.get(`auth/me`)
+            .then(response => {
+                return response.data
+            })
+
     }
+
+
+
+
+
+
 
 }

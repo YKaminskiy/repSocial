@@ -1,3 +1,5 @@
+import {ApiUsers} from "../api/api";
+
 let initState = {
 
     users: [],
@@ -5,6 +7,7 @@ let initState = {
     totalUsersCount: 5,
     currentPage: 2,
     isFetching: false,
+    followingInProgress: []
 }
 
 const userReduxer = (state = initState, action) => {
@@ -46,15 +49,24 @@ const userReduxer = (state = initState, action) => {
             return {...state, isFetching: action.isFetching}
         }
 
+        case 'TOGGLER-FOLLOW-PROGRESS': {
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                ? [...state.followingInProgress, action.userId]
+                : state.followingInProgress.filter(id=>id != action.userId)
+            }
+        }
+
         default:
             return state;
     }
 };
 
-export const follow = (userId) => {
+export const followSuccess = (userId) => {
     return {type: "FOLLOW", userId}
 };
-export const unfollow = (userId) => {
+export const unfollowSuccess = (userId) => {
     return {type: "UNFOLLOW", userId}
 };
 export const setUsers = (users) => {
@@ -69,5 +81,51 @@ export const setTotalCount = (totalUsersCount) => {
 export const toggleLoadingImg = (isFetching) => {
     return {type: "TOGGLE-LOADING-IMG", isFetching}
 };
+
+export const toglerFollowProgress = (isFetching, userId) => {
+    return{type:'TOGGLER-FOLLOW-PROGRESS', isFetching, userId}
+}
+
+
+export const getUsers = (currentPage, pageSize)=> {
+    return  (dispatch) =>     {
+
+        dispatch(toggleLoadingImg(true));
+        ApiUsers.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleLoadingImg(false));
+            dispatch(setUsers(data.items));
+            dispatch(setTotalCount(data.totalCount));
+        })
+    }
+}
+
+export const unfollow = (id) => {
+    return(dispatch) => {
+        dispatch(toglerFollowProgress(true, id))
+        ApiUsers.unfollow(id).then(data => {
+            if (data.resultCode == 0) {
+                dispatch(unfollowSuccess(id))
+            }
+            dispatch(toglerFollowProgress(false, id))
+        })
+    }
+}
+
+
+export const follow = (id) => {
+    return(dispatch) => {
+        dispatch(toglerFollowProgress(true, id))
+        ApiUsers.follow(id).then(data => {
+            if (data.resultCode == 0) {
+                dispatch(followSuccess(id))
+            }
+            dispatch(toglerFollowProgress(false, id))
+        })
+
+    }
+}
+
+
+
 
 export default userReduxer;

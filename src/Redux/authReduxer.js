@@ -1,3 +1,5 @@
+import axios from "axios";
+
 let initState = {
 
     id: null,
@@ -31,7 +33,15 @@ export let setAuthUserData = (id, email, login) => {
             login
         }
     }
-};
+}
+
+export const authUser = () => {
+    return(dispatch) => {
+
+
+    }
+}
+
 
 export default authReduxer;
 
