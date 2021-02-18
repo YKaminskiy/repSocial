@@ -5,7 +5,7 @@ let initState = {
     users: [],
     pageSize: 15,
     totalUsersCount: 5,
-    currentPage: 2,
+    currentPage: 1,
     isFetching: false,
     followingInProgress: []
 }

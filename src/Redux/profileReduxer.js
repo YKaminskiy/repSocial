@@ -1,3 +1,4 @@
+import {ApiUsers} from "../api/api";
 
 
 let initState = {
@@ -65,6 +66,17 @@ export let setUserProfile = (profile) => {
     }
 
 };
+
+
+export const getUserProfile = (userId) => {
+    return(dispatch) => {
+        ApiUsers.getProfile(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data));
+            })
+
+    }
+}
 
 export default profileReduxer;
 

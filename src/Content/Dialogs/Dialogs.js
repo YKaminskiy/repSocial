@@ -2,6 +2,8 @@ import styles from "./Dialogs.module.css"
 import React from "react";
 import DialogsUser from "./DialogUser/DialogsUser";
 import Messages from "./Messages/Messages";
+import Redirect from "react-router-dom/es/Redirect";
+
 
 
 
@@ -25,7 +27,10 @@ const Dialogs = (props) => {
 
     }
 
-    return (
+    if (!props.isAuth) return <Redirect to={'/login'}/>
+
+
+                         return(
 
         <div className={styles.dialogs}>
 
@@ -45,5 +50,6 @@ const Dialogs = (props) => {
         </div>
 )
 }
+
 
 export default Dialogs;

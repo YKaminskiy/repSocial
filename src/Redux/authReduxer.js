@@ -1,4 +1,4 @@
-import axios from "axios";
+import {ApiUsers} from "../api/api";
 
 let initState = {
 
@@ -37,10 +37,18 @@ export let setAuthUserData = (id, email, login) => {
 
 export const authUser = () => {
     return(dispatch) => {
+        ApiUsers.userAuth()
+            .then(response => {
 
+                if (response.data.resultCode === 0) {
+
+                    let {id, email, login} = response.data.data
+                    dispatch(setAuthUserData(id, email, login))
+                }})
+    }
 
     }
-}
+
 
 
 export default authReduxer;
