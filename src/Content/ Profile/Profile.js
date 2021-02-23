@@ -11,9 +11,9 @@ const Profile = (props) => {
         <div className={styles.profile}>
 
 
-        <ProfileInfo profile = {props.profile} />
+        <ProfileInfo profile = {props.profile} status = {props.status} updateUserProfileStatus = {props.updateUserProfileStatus} />
 
-        <ProfilePostsContainer store={props.store}/>
+            <ProfilePostsContainer store={props.store}/>
 
 
 

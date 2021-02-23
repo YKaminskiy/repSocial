@@ -1,4 +1,4 @@
-import {ApiUsers} from "../api/api";
+import {ApiProfile} from "../api/api";
 
 
 let initState = {
@@ -9,8 +9,9 @@ let initState = {
                 likes: 43
             },
         ],
-        newPostText: '',
+
     profile: null,
+    status: '',
     };
 
 
@@ -19,20 +20,15 @@ const profileReduxer = (state = initState, action) => {
     switch (action.type) {
         case "POST-ADD":
             let newPost = {
-              message: state.newPostText,
+                message: action.profileFormMessageText,
                 id: "7",
                 likes: "0"
-                            }
+            }
             return {
                 ...state,
-                newPostText: "",
                 ProfileMessagesDB: [...state.ProfileMessagesDB, newPost]
             }
-        case "UPDATE-POST":
-                   return {
-                       ...state,
-                       newPostText: action.text
-                   }
+
 
         case "SET-USER-PROFILE": {
             return {
@@ -40,25 +36,26 @@ const profileReduxer = (state = initState, action) => {
                 profile: action.profile
             }
         }
+        case "SET-USER-STATUS": {
+            return {
+                ...state,
+                status: action.status
+            }
+        }
         default:
             return state;
 
+
     }
-
-
 }
-export let addPostActionCreator = () => {
+
+export let addPostActionCreator = (profileFormMessageText) => {
     return {
-        type: "POST-ADD"
+        type: "POST-ADD", profileFormMessageText
     }
 
 };
-export let updatePostActionCreator = (messageText) => {
-    return {
-        type: "UPDATE-POST", text: messageText
-    }
 
-};
 
 export let setUserProfile = (profile) => {
     return {
@@ -67,16 +64,47 @@ export let setUserProfile = (profile) => {
 
 };
 
+export let setUserStatus = (status) => {
+    return {
+        type:"SET-USER-STATUS", status
+    }
+};
+
+
+export const getUserProfileStatus = (userId) => {
+    return(dispatch) => {
+        ApiProfile.getUserStatus(userId)
+            .then(response => {
+                dispatch(setUserStatus(response.data))
+            } )
+    }
+};
+
+
+export const updateUserProfileStatus = (status) => {
+    return(dispatch) => {
+        ApiProfile.updateProfileStatus(status)
+            .then(response => {
+                if(response.data.resultCode === 0) {
+                dispatch(setUserStatus(status))
+            } })
+    }
+};
+
 
 export const getUserProfile = (userId) => {
     return(dispatch) => {
-        ApiUsers.getProfile(userId)
+        ApiProfile.getProfile(userId)
             .then(response => {
                 dispatch(setUserProfile(response.data));
             })
 
     }
-}
+};
+
+
+
+
 
 export default profileReduxer;
 

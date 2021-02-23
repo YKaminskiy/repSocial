@@ -49,6 +49,28 @@ export const authUser = () => {
 
     }
 
+export const login = (email, password, rememberMe) => {
+    return(dispatch) => {
+        ApiUsers.login(email, password, rememberMe)
+            .then(response => {
+
+                if (response.data.resultCode === 0) {
+                    dispatch(authUser())
+                }})
+    }
+
+}
+export const logout = () => {
+    return(dispatch) => {
+        ApiUsers.logout()
+            .then(response => {
+
+                if (response.data.resultCode === 0) {
+                    dispatch(authUser())
+                }})
+    }
+
+}
 
 
 export default authReduxer;

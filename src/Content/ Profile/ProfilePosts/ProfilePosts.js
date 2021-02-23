@@ -1,6 +1,8 @@
-import styles from './ProfilePosts.module.css'
 import Post from "./Post/Post";
 import React from "react";
+import {Field, reduxForm} from "redux-form";
+import {maxLenghtCreator, recuired} from "../../../utils/validators";
+import {Textarea} from "../../../common/FormsControls/FormsControls";
 
 const ProfilePosts = (props) => {
 
@@ -8,36 +10,34 @@ const ProfilePosts = (props) => {
         <Post message={item.message} likes={item.likes}/>
     );
 
-    let addPost = () => {
-        props.addPost()
+    let addProfilePost = (values) => {
+        props.addPost(values.profileFormMessageText)
     }
 
-    let changeText = (event) => {
-        let messageText = event.target.value;
-        props.changeText(messageText)
-    }
+
     return (
 
         <div>My posts
-
-            <div>
-
-                <div><textarea placeholder={"Message"} onChange={changeText}
-                            value={props.profilePage.newPostText}/></div>
-                <div>
-                    <button onClick={addPost}>Add</button>
-                </div>
-            </div>
-
-            <div className={styles.posts}>
-
                 {ProfileMessages}
-
-            </div>
-
+                <AddProfilePostRedux onSubmit ={addProfilePost} />
         </div>
 
     )
 }
+
+const maxLenght25 = maxLenghtCreator(25)
+
+export const AddProfilePost =(props)=> {
+    return(
+        <form onSubmit={props.handleSubmit}>
+            <Field component={Textarea} name='profileFormMessageText' placeholder='Message' validate={[recuired, maxLenght25]}/>
+
+            <div><button>Add</button></div>
+
+        </form>
+    )
+}
+
+const AddProfilePostRedux = reduxForm({form:"profileFormMessage"})(AddProfilePost)
 
 export default ProfilePosts;

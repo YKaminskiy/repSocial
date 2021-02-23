@@ -16,39 +16,26 @@ let initState = {
             {message: 'Lorem Ipsum is that it has a more-or-less normal distribution'},
             {message: 'Pellentesque ac ex et dui hendrerit cursus'},
             {message: 'Donec sodales pulvinar imperdiet'},
-        ],
-        newMessageText: "",
+        ]
+
     };
 
 const dialogsReduxer = (state = initState, action) => {
 
-
     switch (action.type) {
         case "MESSAGE-ADD":
-            let newDailog = state.newMessageText;
+            let newDailog = action.dialogsFormMessageText;
                return {
                    ...state,
-                   newMessageText: '',
                    messagesDB: [...state.messagesDB, {message: newDailog}]
                }
-        case  "UPDATE-MESSAGE":
-            return {
-                ...state,
-                newMessageText: action.text
-            }
-
-        default:
+            default:
             return state;
     }
 }
-export let addMessageActionCreator = () => {
+export let addMessageActionCreator = (dialogsFormMessageText) => {
     return {
-        type: "MESSAGE-ADD"
-    }
-};
-export let updateMessageActionCreator = (messageText) => {
-    return {
-        type: "UPDATE-MESSAGE", text:messageText
+        type: "MESSAGE-ADD", dialogsFormMessageText
     }
 };
 

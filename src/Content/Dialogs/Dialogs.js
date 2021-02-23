@@ -3,10 +3,9 @@ import React from "react";
 import DialogsUser from "./DialogUser/DialogsUser";
 import Messages from "./Messages/Messages";
 import Redirect from "react-router-dom/es/Redirect";
-
-
-
-
+import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../../common/FormsControls/FormsControls";
+import {maxLenghtCreator, recuired} from "../../utils/validators";
 
 const Dialogs = (props) => {
     let DialogUser = props.dialogsPage.usersDB.map(item =>
@@ -17,14 +16,8 @@ const Dialogs = (props) => {
         <Messages message = {item.message} />
 );
 
-     let addMessage = () => {
-        props.addMessage();
-    }
-
-    let newMessage = (event) => {
-       let  messageText = event.target.value;
-       props.newMessage (messageText);
-
+    const addNewMessage = (values) => {
+        props.addMessage(values.dialogsFormMessageText)
     }
 
     if (!props.isAuth) return <Redirect to={'/login'}/>
@@ -43,13 +36,26 @@ const Dialogs = (props) => {
             <div className={styles.messages}>
 
                 {DialogMessages}
-                <div><textarea placeholder={"Message"} onChange={newMessage} value={props.dialogsPage.newMessageText}/></div>
-                <div><button onClick={addMessage}>Add</button></div>
+<div> <AddMessageFormRedux onSubmit = {addNewMessage} /> </div>
 
             </div>
         </div>
 )
 }
+
+const maxLenght70 = maxLenghtCreator(70)
+
+export const AddMessagesForm = (props) => {
+    return (
+<form onSubmit={props.handleSubmit}>
+    <div><Field component={Textarea} name='dialogsFormMessageText' placeholder='Message' validate={[recuired, maxLenght70]} />
+        </div>
+    <div><button>Add</button></div>
+</form>
+    )
+}
+
+const AddMessageFormRedux = reduxForm({form: 'dialogsAddMessagesForm'})(AddMessagesForm)
 
 
 export default Dialogs;

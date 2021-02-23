@@ -1,19 +1,54 @@
-import styles from './LoginPage.css'
+import styles from './LoginPage.module.css'
+import {Field, reduxForm} from "redux-form";
+import React from "react";
+import {Input} from "../common/FormsControls/FormsControls";
+import {maxLenghtCreator, recuired} from "../utils/validators";
 
-const LoginPage =(props) => {
+
+const maxLenght16 = maxLenghtCreator(16)
+
+const LoginForm =(props) => {
+
     return (
 
-    <div className={styles.login}>
 
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field placeholder={'Login'} name={'login'} component={Input} validate={[recuired, maxLenght16]}/>
+            </div>
+            <div>
+                <Field placeholder={"Password"} name={'password'} component={Input} validate={[recuired, maxLenght16]}/>
+            </div>
+            <div>
+                <Field component={'input'} name={'rememberMe'} type={'checkbox'}/> Remember
+            </div>
+            <div>
+                <button> Login </button>
+            </div>
 
-       <h2>Login page </h2>
+        </form>
 
-
-    </div>
 
     )
 }
 
+const LoginReduxForm = reduxForm({form: 'login'}) (LoginForm)
+
+const LoginPage = (props) => {
+    const onSubmit = (formData) => {
+        console.log(formData)
+    }
+return (
+
+    <div className={styles.loginf}>
+    <h2>Login</h2>
+
+    <LoginReduxForm onSubmit ={onSubmit} />
+
+
+</div>
+)
+}
 
 
 export default LoginPage;
