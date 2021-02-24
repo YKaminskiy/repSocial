@@ -87,7 +87,7 @@ export const toglerFollowProgress = (isFetching, userId) => {
 }
 
 
-export const getUsers = (currentPage, pageSize)=> {
+export const getUsersData = (currentPage, pageSize)=> {
     return  (dispatch) =>     {
 
         dispatch(toggleLoadingImg(true));

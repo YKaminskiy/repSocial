@@ -1,4 +1,5 @@
 import {ApiUsers} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 let initState = {
 
@@ -16,34 +17,34 @@ const authReduxer = (state = initState, action) => {
 
             return {
                 ...state,
-                ...action.data,
-                isAuth: true,
+                ...action.payload,
 
-            }
+                            }
         default:
             return state;
     }
 }
-export let setAuthUserData = (id, email, login) => {
+export let setAuthUserData = (id, email, login, isAuth) => {
     return {
         type: "SET-USER-DATA",
-        data: {
+        payload: {
             id,
             email,
-            login
+            login,
+            isAuth
         }
     }
 }
 
 export const authUser = () => {
     return(dispatch) => {
-        ApiUsers.userAuth()
+       return ApiUsers.userAuth()
             .then(response => {
 
                 if (response.data.resultCode === 0) {
 
                     let {id, email, login} = response.data.data
-                    dispatch(setAuthUserData(id, email, login))
+                    dispatch(setAuthUserData(id, email, login, true))
                 }})
     }
 
@@ -56,7 +57,13 @@ export const login = (email, password, rememberMe) => {
 
                 if (response.data.resultCode === 0) {
                     dispatch(authUser())
-                }})
+                }else {
+                    let message = response.data.messages[0]
+                    dispatch(stopSubmit('login', {_error:message} ))
+
+                }
+
+            })
     }
 
 }
@@ -66,7 +73,7 @@ export const logout = () => {
             .then(response => {
 
                 if (response.data.resultCode === 0) {
-                    dispatch(authUser())
+                    dispatch(setAuthUserData(null, null, null, false))
                 }})
     }
 

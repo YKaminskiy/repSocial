@@ -1,3 +1,10 @@
 .loginf {
     background: #cdc583;
 }
+
+
+.formAllerror {
+    border: solid red 2px;
+    padding: 5px;
+    color: #ea5c38;
+}

@@ -3,9 +3,15 @@ import {Field, reduxForm} from "redux-form";
 import React from "react";
 import {Input} from "../common/FormsControls/FormsControls";
 import {maxLenghtCreator, recuired} from "../utils/validators";
+import {connect} from "react-redux";
+import {login} from "../Redux/authReduxer";
+import Redirect from "react-router-dom/es/Redirect";
 
 
-const maxLenght16 = maxLenghtCreator(16)
+
+
+
+const maxLenght25 = maxLenghtCreator(25)
 
 const LoginForm =(props) => {
 
@@ -14,14 +20,15 @@ const LoginForm =(props) => {
 
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Login'} name={'login'} component={Input} validate={[recuired, maxLenght16]}/>
+                <Field placeholder={'Email'} name={'email'} component={Input} validate={[recuired, maxLenght25]}/>
             </div>
             <div>
-                <Field placeholder={"Password"} name={'password'} component={Input} validate={[recuired, maxLenght16]}/>
+                <Field placeholder={"Password"} name={'password'} component={Input} validate={[recuired, maxLenght25]} type={'password'}/>
             </div>
             <div>
                 <Field component={'input'} name={'rememberMe'} type={'checkbox'}/> Remember
             </div>
+            {props.error && <div className={styles.formAllerror}>  {props.error} </div> }
             <div>
                 <button> Login </button>
             </div>
@@ -36,8 +43,15 @@ const LoginReduxForm = reduxForm({form: 'login'}) (LoginForm)
 
 const LoginPage = (props) => {
     const onSubmit = (formData) => {
-        console.log(formData)
+        props.login(formData.email, formData.password, formData.rememberMe)
     }
+
+    if (props.isAuth == true ) {
+        return  <Redirect to={'/profile'} />
+    }
+
+
+
 return (
 
     <div className={styles.loginf}>
@@ -50,5 +64,10 @@ return (
 )
 }
 
+const mapStateToProp = (state) => ({
+         isAuth: state.auth.isAuth
 
-export default LoginPage;
+
+})
+
+export default connect (mapStateToProp, {login}) (LoginPage);
